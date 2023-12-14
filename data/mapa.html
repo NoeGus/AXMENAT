@@ -1,0 +1,2206 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/poligonos_alcaldias_cdmx_1.js"></script>
+        <script src="data/densidadpoblacion2010_2.js"></script>
+        <script src="data/hex_ingresos_3.js"></script>
+        <script src="data/CConcesionado_Paradas_4.js"></script>
+        <script src="data/CConcesionado_Rutas_5.js"></script>
+        <script src="data/Hospitales_ISSSTE_6.js"></script>
+        <script src="data/UnidadesHospitalarias_7.js"></script>
+        <script src="data/CableBus_8.js"></script>
+        <script src="data/EstacionesCablebus_9.js"></script>
+        <script src="data/TrenLigeroLineas_10.js"></script>
+        <script src="data/TrenLigeroParadas_11.js"></script>
+        <script src="data/Trolebus_Lineas_12.js"></script>
+        <script src="data/TrolebusEstaciones_13.js"></script>
+        <script src="data/MetrobusLineas_14.js"></script>
+        <script src="data/MetrobusEstaciones_15.js"></script>
+        <script src="data/MetroLineas_16.js"></script>
+        <script src="data/MetroEstaciones_17.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.092841878939343,-99.5855165576734],[19.557995232571752,-98.74426337350178]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_poligonos_alcaldias_cdmx_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NOMGEO</th>\
+                        <td>' + (feature.properties['NOMGEO'] !== null ? autolinker.link(feature.properties['NOMGEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_poligonos_alcaldias_cdmx_1_0() {
+            return {
+                pane: 'pane_poligonos_alcaldias_cdmx_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(149,63,225,0.37254901960784315)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_poligonos_alcaldias_cdmx_1');
+        map.getPane('pane_poligonos_alcaldias_cdmx_1').style.zIndex = 401;
+        map.getPane('pane_poligonos_alcaldias_cdmx_1').style['mix-blend-mode'] = 'normal';
+        var layer_poligonos_alcaldias_cdmx_1 = new L.geoJson(json_poligonos_alcaldias_cdmx_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_poligonos_alcaldias_cdmx_1',
+            layerName: 'layer_poligonos_alcaldias_cdmx_1',
+            pane: 'pane_poligonos_alcaldias_cdmx_1',
+            onEachFeature: pop_poligonos_alcaldias_cdmx_1,
+            style: style_poligonos_alcaldias_cdmx_1_0,
+        });
+        bounds_group.addLayer(layer_poligonos_alcaldias_cdmx_1);
+        map.addLayer(layer_poligonos_alcaldias_cdmx_1);
+        function pop_densidadpoblacion2010_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">cve_ent</th>\
+                        <td>' + (feature.properties['cve_ent'] !== null ? autolinker.link(feature.properties['cve_ent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">alcaldia</th>\
+                        <td>' + (feature.properties['alcaldia'] !== null ? autolinker.link(feature.properties['alcaldia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">cve_col</th>\
+                        <td>' + (feature.properties['cve_col'] !== null ? autolinker.link(feature.properties['cve_col'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">colonia</th>\
+                        <td>' + (feature.properties['colonia'] !== null ? autolinker.link(feature.properties['colonia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PobTot2020</th>\
+                        <td>' + (feature.properties['PobTot2020'] !== null ? autolinker.link(feature.properties['PobTot2020'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_densidadpoblacion2010_2_0(feature) {
+            switch(String(feature.properties['alcaldia'])) {
+                case 'ALVARO OBREGON':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,40,48,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'AZCAPOTZALCO':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,144,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BENITO JUAREZ':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,229,77,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'COYOACAN':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,96,175,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CUAJIMALPA DE MORELOS':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(184,223,113,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CUAUHTEMOC':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,85,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'GUSTAVO A. MADERO':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(101,202,143,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'IZTACALCO':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(90,202,96,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'IZTAPALAPA':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,22,106,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LA MAGDALENA CONTRERAS':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,117,220,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MIGUEL HIDALGO':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,74,16,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MILPA ALTA':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,208,221,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TLAHUAC':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(59,28,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TLALPAN':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,64,221,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VENUSTIANO CARRANZA':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(54,219,181,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'XOCHIMILCO':
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,227,64,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_densidadpoblacion2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,203,137,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_densidadpoblacion2010_2');
+        map.getPane('pane_densidadpoblacion2010_2').style.zIndex = 402;
+        map.getPane('pane_densidadpoblacion2010_2').style['mix-blend-mode'] = 'normal';
+        var layer_densidadpoblacion2010_2 = new L.geoJson(json_densidadpoblacion2010_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_densidadpoblacion2010_2',
+            layerName: 'layer_densidadpoblacion2010_2',
+            pane: 'pane_densidadpoblacion2010_2',
+            onEachFeature: pop_densidadpoblacion2010_2,
+            style: style_densidadpoblacion2010_2_0,
+        });
+        bounds_group.addLayer(layer_densidadpoblacion2010_2);
+        function pop_hex_ingresos_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">clv_ingre</th>\
+                        <td>' + (feature.properties['clv_ingre'] !== null ? autolinker.link(feature.properties['clv_ingre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">r_ingreso</th>\
+                        <td>' + (feature.properties['r_ingreso'] !== null ? autolinker.link(feature.properties['r_ingreso'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_hex_ingresos_3_0() {
+            return {
+                pane: 'pane_hex_ingresos_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_hex_ingresos_3');
+        map.getPane('pane_hex_ingresos_3').style.zIndex = 403;
+        map.getPane('pane_hex_ingresos_3').style['mix-blend-mode'] = 'normal';
+        var layer_hex_ingresos_3 = new L.geoJson(json_hex_ingresos_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_hex_ingresos_3',
+            layerName: 'layer_hex_ingresos_3',
+            pane: 'pane_hex_ingresos_3',
+            onEachFeature: pop_hex_ingresos_3,
+            style: style_hex_ingresos_3_0,
+        });
+        bounds_group.addLayer(layer_hex_ingresos_3);
+        function pop_CConcesionado_Paradas_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CORREDOR</th>\
+                        <td>' + (feature.properties['CORREDOR'] !== null ? autolinker.link(feature.properties['CORREDOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ORIG_DEST</th>\
+                        <td>' + (feature.properties['ORIG_DEST'] !== null ? autolinker.link(feature.properties['ORIG_DEST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RUTA</th>\
+                        <td>' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CConcesionado_Paradas_4_0() {
+            return {
+                pane: 'pane_CConcesionado_Paradas_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CConcesionado_Paradas_4');
+        map.getPane('pane_CConcesionado_Paradas_4').style.zIndex = 404;
+        map.getPane('pane_CConcesionado_Paradas_4').style['mix-blend-mode'] = 'normal';
+        var layer_CConcesionado_Paradas_4 = new L.geoJson(json_CConcesionado_Paradas_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CConcesionado_Paradas_4',
+            layerName: 'layer_CConcesionado_Paradas_4',
+            pane: 'pane_CConcesionado_Paradas_4',
+            onEachFeature: pop_CConcesionado_Paradas_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CConcesionado_Paradas_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CConcesionado_Paradas_4);
+        function pop_CConcesionado_Rutas_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CORREDOR'] !== null ? autolinker.link(feature.properties['CORREDOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMEN_COR'] !== null ? autolinker.link(feature.properties['NOMEN_COR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ORIG_DEST'] !== null ? autolinker.link(feature.properties['ORIG_DEST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMEN_OD'] !== null ? autolinker.link(feature.properties['NOMEN_OD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMENCL'] !== null ? autolinker.link(feature.properties['NOMENCL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CConcesionado_Rutas_5_0() {
+            return {
+                pane: 'pane_CConcesionado_Rutas_5',
+                opacity: 1,
+                color: 'rgba(22,224,25,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CConcesionado_Rutas_5');
+        map.getPane('pane_CConcesionado_Rutas_5').style.zIndex = 405;
+        map.getPane('pane_CConcesionado_Rutas_5').style['mix-blend-mode'] = 'normal';
+        var layer_CConcesionado_Rutas_5 = new L.geoJson(json_CConcesionado_Rutas_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CConcesionado_Rutas_5',
+            layerName: 'layer_CConcesionado_Rutas_5',
+            pane: 'pane_CConcesionado_Rutas_5',
+            onEachFeature: pop_CConcesionado_Rutas_5,
+            style: style_CConcesionado_Rutas_5_0,
+        });
+        bounds_group.addLayer(layer_CConcesionado_Rutas_5);
+        map.addLayer(layer_CConcesionado_Rutas_5);
+        function pop_Hospitales_ISSSTE_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">g_pnt_2</th>\
+                        <td>' + (feature.properties['g_pnt_2'] !== null ? autolinker.link(feature.properties['g_pnt_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nombre</th>\
+                        <td>' + (feature.properties['nombre'] !== null ? autolinker.link(feature.properties['nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO_INSTI</th>\
+                        <td>' + (feature.properties['TIPO_INSTI'] !== null ? autolinker.link(feature.properties['TIPO_INSTI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Hospitales_ISSSTE_6_0() {
+            return {
+                pane: 'pane_Hospitales_ISSSTE_6',
+                radius: 10.4,
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: true,
+            }
+        }
+        function style_Hospitales_ISSSTE_6_1() {
+            return {
+                pane: 'pane_Hospitales_ISSSTE_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(227,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Hospitales_ISSSTE_6');
+        map.getPane('pane_Hospitales_ISSSTE_6').style.zIndex = 406;
+        map.getPane('pane_Hospitales_ISSSTE_6').style['mix-blend-mode'] = 'normal';
+        var layer_Hospitales_ISSSTE_6 = new L.geoJson.multiStyle(json_Hospitales_ISSSTE_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Hospitales_ISSSTE_6',
+            layerName: 'layer_Hospitales_ISSSTE_6',
+            pane: 'pane_Hospitales_ISSSTE_6',
+            onEachFeature: pop_Hospitales_ISSSTE_6,
+            pointToLayers: [function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Hospitales_ISSSTE_6_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Hospitales_ISSSTE_6_1(feature));
+            },
+        ]});
+        bounds_group.addLayer(layer_Hospitales_ISSSTE_6);
+        function pop_UnidadesHospitalarias_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LONGITUD</th>\
+                        <td>' + (feature.properties['LONGITUD'] !== null ? autolinker.link(feature.properties['LONGITUD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LATITUD</th>\
+                        <td>' + (feature.properties['LATITUD'] !== null ? autolinker.link(feature.properties['LATITUD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DIRECCION</th>\
+                        <td>' + (feature.properties['DIRECCION'] !== null ? autolinker.link(feature.properties['DIRECCION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOM_UNIDAD</th>\
+                        <td>' + (feature.properties['NOM_UNIDAD'] !== null ? autolinker.link(feature.properties['NOM_UNIDAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO_INSTI</th>\
+                        <td>' + (feature.properties['TIPO_INSTI'] !== null ? autolinker.link(feature.properties['TIPO_INSTI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CVEDT</th>\
+                        <td>' + (feature.properties['CVEDT'] !== null ? autolinker.link(feature.properties['CVEDT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIA</th>\
+                        <td>' + (feature.properties['ALCALDIA'] !== null ? autolinker.link(feature.properties['ALCALDIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COLONIA</th>\
+                        <td>' + (feature.properties['COLONIA'] !== null ? autolinker.link(feature.properties['COLONIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_UnidadesHospitalarias_7_0() {
+            return {
+                pane: 'pane_UnidadesHospitalarias_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_UnidadesHospitalarias_7');
+        map.getPane('pane_UnidadesHospitalarias_7').style.zIndex = 407;
+        map.getPane('pane_UnidadesHospitalarias_7').style['mix-blend-mode'] = 'normal';
+        var layer_UnidadesHospitalarias_7 = new L.geoJson(json_UnidadesHospitalarias_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_UnidadesHospitalarias_7',
+            layerName: 'layer_UnidadesHospitalarias_7',
+            pane: 'pane_UnidadesHospitalarias_7',
+            onEachFeature: pop_UnidadesHospitalarias_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_UnidadesHospitalarias_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_UnidadesHospitalarias_7);
+        function pop_CableBus_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RUTA</th>\
+                        <td>' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CableBus_8_0() {
+            return {
+                pane: 'pane_CableBus_8',
+                opacity: 1,
+                color: 'rgba(230,241,15,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CableBus_8');
+        map.getPane('pane_CableBus_8').style.zIndex = 408;
+        map.getPane('pane_CableBus_8').style['mix-blend-mode'] = 'normal';
+        var layer_CableBus_8 = new L.geoJson(json_CableBus_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CableBus_8',
+            layerName: 'layer_CableBus_8',
+            pane: 'pane_CableBus_8',
+            onEachFeature: pop_CableBus_8,
+            style: style_CableBus_8_0,
+        });
+        bounds_group.addLayer(layer_CableBus_8);
+        function pop_EstacionesCablebus_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIAS</th>\
+                        <td>' + (feature.properties['ALCALDIAS'] !== null ? autolinker.link(feature.properties['ALCALDIAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ELEVADORES</th>\
+                        <td>' + (feature.properties['ELEVADORES'] !== null ? autolinker.link(feature.properties['ELEVADORES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionesCablebus_9_0() {
+            return {
+                pane: 'pane_EstacionesCablebus_9',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,8,63,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_EstacionesCablebus_9');
+        map.getPane('pane_EstacionesCablebus_9').style.zIndex = 409;
+        map.getPane('pane_EstacionesCablebus_9').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionesCablebus_9 = new L.geoJson(json_EstacionesCablebus_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_EstacionesCablebus_9',
+            layerName: 'layer_EstacionesCablebus_9',
+            pane: 'pane_EstacionesCablebus_9',
+            onEachFeature: pop_EstacionesCablebus_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstacionesCablebus_9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionesCablebus_9);
+        function pop_TrenLigeroLineas_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TrenLigeroLineas_10_0() {
+            return {
+                pane: 'pane_TrenLigeroLineas_10',
+                opacity: 1,
+                color: 'rgba(72,168,252,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TrenLigeroLineas_10');
+        map.getPane('pane_TrenLigeroLineas_10').style.zIndex = 410;
+        map.getPane('pane_TrenLigeroLineas_10').style['mix-blend-mode'] = 'normal';
+        var layer_TrenLigeroLineas_10 = new L.geoJson(json_TrenLigeroLineas_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TrenLigeroLineas_10',
+            layerName: 'layer_TrenLigeroLineas_10',
+            pane: 'pane_TrenLigeroLineas_10',
+            onEachFeature: pop_TrenLigeroLineas_10,
+            style: style_TrenLigeroLineas_10_0,
+        });
+        bounds_group.addLayer(layer_TrenLigeroLineas_10);
+        function pop_TrenLigeroParadas_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EST</th>\
+                        <td>' + (feature.properties['EST'] !== null ? autolinker.link(feature.properties['EST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIAS</th>\
+                        <td>' + (feature.properties['ALCALDIAS'] !== null ? autolinker.link(feature.properties['ALCALDIAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ELEVADORES</th>\
+                        <td>' + (feature.properties['ELEVADORES'] !== null ? autolinker.link(feature.properties['ELEVADORES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RAMPA</th>\
+                        <td>' + (feature.properties['RAMPA'] !== null ? autolinker.link(feature.properties['RAMPA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TrenLigeroParadas_11_0() {
+            return {
+                pane: 'pane_TrenLigeroParadas_11',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,20,249,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TrenLigeroParadas_11');
+        map.getPane('pane_TrenLigeroParadas_11').style.zIndex = 411;
+        map.getPane('pane_TrenLigeroParadas_11').style['mix-blend-mode'] = 'normal';
+        var layer_TrenLigeroParadas_11 = new L.geoJson(json_TrenLigeroParadas_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TrenLigeroParadas_11',
+            layerName: 'layer_TrenLigeroParadas_11',
+            pane: 'pane_TrenLigeroParadas_11',
+            onEachFeature: pop_TrenLigeroParadas_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_TrenLigeroParadas_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TrenLigeroParadas_11);
+        function pop_Trolebus_Lineas_12(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">circuito</th>\
+                        <td>' + (feature.properties['circuito'] !== null ? autolinker.link(feature.properties['circuito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RUTA</th>\
+                        <td>' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Trolebus_Lineas_12_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '01':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(202,104,150,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '02':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(109,190,234,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '03':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(177,205,36,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '04':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(103,231,53,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '05':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(107,25,214,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '06':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(231,183,105,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '07':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(222,86,224,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '08':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(32,238,200,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '09':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(106,212,134,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(43,62,237,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Trolebus_Lineas_12',
+                opacity: 1,
+                color: 'rgba(200,60,50,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Trolebus_Lineas_12');
+        map.getPane('pane_Trolebus_Lineas_12').style.zIndex = 412;
+        map.getPane('pane_Trolebus_Lineas_12').style['mix-blend-mode'] = 'normal';
+        var layer_Trolebus_Lineas_12 = new L.geoJson(json_Trolebus_Lineas_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Trolebus_Lineas_12',
+            layerName: 'layer_Trolebus_Lineas_12',
+            pane: 'pane_Trolebus_Lineas_12',
+            onEachFeature: pop_Trolebus_Lineas_12,
+            style: style_Trolebus_Lineas_12_0,
+        });
+        bounds_group.addLayer(layer_Trolebus_Lineas_12);
+        function pop_TrolebusEstaciones_13(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">circuito</th>\
+                        <td>' + (feature.properties['circuito'] !== null ? autolinker.link(feature.properties['circuito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIAS</th>\
+                        <td>' + (feature.properties['ALCALDIAS'] !== null ? autolinker.link(feature.properties['ALCALDIAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TrolebusEstaciones_13_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '01':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(91,216,101,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '02':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,214,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '03':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(19,231,150,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '04':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,238,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '05':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,116,205,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '06':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(130,91,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '07':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,125,134,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '08':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,150,81,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '09':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(15,70,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,67,159,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_TrolebusEstaciones_13',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,209,226,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_TrolebusEstaciones_13');
+        map.getPane('pane_TrolebusEstaciones_13').style.zIndex = 413;
+        map.getPane('pane_TrolebusEstaciones_13').style['mix-blend-mode'] = 'normal';
+        var layer_TrolebusEstaciones_13 = new L.geoJson(json_TrolebusEstaciones_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TrolebusEstaciones_13',
+            layerName: 'layer_TrolebusEstaciones_13',
+            pane: 'pane_TrolebusEstaciones_13',
+            onEachFeature: pop_TrolebusEstaciones_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_TrolebusEstaciones_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TrolebusEstaciones_13);
+        function pop_MetrobusLineas_14(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RUTA</th>\
+                        <td>' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TRAMO</th>\
+                        <td>' + (feature.properties['TRAMO'] !== null ? autolinker.link(feature.properties['TRAMO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MetrobusLineas_14_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '01':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(200,5,18,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '01 y 02':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(90,230,186,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '02':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(222,44,231,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '02 y 03':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(52,172,219,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '03':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(21,202,58,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '04':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(218,103,140,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '05':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(202,187,90,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '06':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(255,21,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '07':
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(22,166,34,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MetrobusLineas_14',
+                opacity: 1,
+                color: 'rgba(121,134,233,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MetrobusLineas_14');
+        map.getPane('pane_MetrobusLineas_14').style.zIndex = 414;
+        map.getPane('pane_MetrobusLineas_14').style['mix-blend-mode'] = 'normal';
+        var layer_MetrobusLineas_14 = new L.geoJson(json_MetrobusLineas_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MetrobusLineas_14',
+            layerName: 'layer_MetrobusLineas_14',
+            pane: 'pane_MetrobusLineas_14',
+            onEachFeature: pop_MetrobusLineas_14,
+            style: style_MetrobusLineas_14_0,
+        });
+        bounds_group.addLayer(layer_MetrobusLineas_14);
+        function pop_MetrobusEstaciones_15(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIAS</th>\
+                        <td>' + (feature.properties['ALCALDIAS'] !== null ? autolinker.link(feature.properties['ALCALDIAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MetrobusEstaciones_15_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '07':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(21,201,69,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '06':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,18,169,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '05':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,20,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '04':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,116,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '03':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(21,164,52,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '02':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,19,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '01':
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,6,10,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MetrobusEstaciones_15',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,49,185,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MetrobusEstaciones_15');
+        map.getPane('pane_MetrobusEstaciones_15').style.zIndex = 415;
+        map.getPane('pane_MetrobusEstaciones_15').style['mix-blend-mode'] = 'normal';
+        var layer_MetrobusEstaciones_15 = new L.geoJson(json_MetrobusEstaciones_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MetrobusEstaciones_15',
+            layerName: 'layer_MetrobusEstaciones_15',
+            pane: 'pane_MetrobusEstaciones_15',
+            onEachFeature: pop_MetrobusEstaciones_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_MetrobusEstaciones_15_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MetrobusEstaciones_15);
+        function pop_MetroLineas_16(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RUTA</th>\
+                        <td>' + (feature.properties['RUTA'] !== null ? autolinker.link(feature.properties['RUTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MetroLineas_16_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '1':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(215,8,177,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(180,200,89,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(65,65,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(148,208,58,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(48,209,237,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(251,255,6,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(222,0,33,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(227,144,20,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(191,230,107,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(135,76,73,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'A':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(125,29,209,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'B':
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(163,163,163,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MetroLineas_16',
+                opacity: 1,
+                color: 'rgba(54,110,201,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MetroLineas_16');
+        map.getPane('pane_MetroLineas_16').style.zIndex = 416;
+        map.getPane('pane_MetroLineas_16').style['mix-blend-mode'] = 'normal';
+        var layer_MetroLineas_16 = new L.geoJson(json_MetroLineas_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MetroLineas_16',
+            layerName: 'layer_MetroLineas_16',
+            pane: 'pane_MetroLineas_16',
+            onEachFeature: pop_MetroLineas_16,
+            style: style_MetroLineas_16_0,
+        });
+        bounds_group.addLayer(layer_MetroLineas_16);
+        function pop_MetroEstaciones_17(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">SISTEMA</th>\
+                        <td>' + (feature.properties['SISTEMA'] !== null ? autolinker.link(feature.properties['SISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMBRE</th>\
+                        <td>' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LINEA</th>\
+                        <td>' + (feature.properties['LINEA'] !== null ? autolinker.link(feature.properties['LINEA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EST</th>\
+                        <td>' + (feature.properties['EST'] !== null ? autolinker.link(feature.properties['EST'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ALCALDIAS</th>\
+                        <td>' + (feature.properties['ALCALDIAS'] !== null ? autolinker.link(feature.properties['ALCALDIAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Elevador</th>\
+                        <td>' + (feature.properties['Elevador'] !== null ? autolinker.link(feature.properties['Elevador'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MetroEstaciones_17_0(feature) {
+            switch(String(feature.properties['LINEA'])) {
+                case '01':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,22,183,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '02':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(70,88,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '03':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(149,231,54,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '04':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(70,234,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '05':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,255,44,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '06':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,0,4,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '07':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(216,94,34,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '08':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(40,168,23,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '09':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,13,1,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(176,200,56,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'A':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(142,19,194,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'B':
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(131,150,147,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_MetroEstaciones_17',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,224,82,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_MetroEstaciones_17');
+        map.getPane('pane_MetroEstaciones_17').style.zIndex = 417;
+        map.getPane('pane_MetroEstaciones_17').style['mix-blend-mode'] = 'normal';
+        var layer_MetroEstaciones_17 = new L.geoJson(json_MetroEstaciones_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MetroEstaciones_17',
+            layerName: 'layer_MetroEstaciones_17',
+            pane: 'pane_MetroEstaciones_17',
+            onEachFeature: pop_MetroEstaciones_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_MetroEstaciones_17_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MetroEstaciones_17);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Metro Estaciones<br /><table><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_010.png" /></td><td>01</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_021.png" /></td><td>02</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_032.png" /></td><td>03</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_043.png" /></td><td>04</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_054.png" /></td><td>05</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_065.png" /></td><td>06</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_076.png" /></td><td>07</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_087.png" /></td><td>08</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_098.png" /></td><td>09</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_129.png" /></td><td>12</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_A10.png" /></td><td>A</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_B11.png" /></td><td>B</td></tr><tr><td style="text-align: center;"><img src="legend/MetroEstaciones_17_12.png" /></td><td></td></tr></table>': layer_MetroEstaciones_17,'Metro Lineas<br /><table><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_121.png" /></td><td>12</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_66.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_77.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_88.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_99.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_A10.png" /></td><td>A</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_B11.png" /></td><td>B</td></tr><tr><td style="text-align: center;"><img src="legend/MetroLineas_16_12.png" /></td><td></td></tr></table>': layer_MetroLineas_16,'Metrobus Estaciones<br /><table><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_070.png" /></td><td>07</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_061.png" /></td><td>06</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_052.png" /></td><td>05</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_043.png" /></td><td>04</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_034.png" /></td><td>03</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_025.png" /></td><td>02</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_016.png" /></td><td>01</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusEstaciones_15_7.png" /></td><td></td></tr></table>': layer_MetrobusEstaciones_15,'Metrobus Lineas<br /><table><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_010.png" /></td><td>01</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_01y021.png" /></td><td>01 y 02</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_022.png" /></td><td>02</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_02y033.png" /></td><td>02 y 03</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_034.png" /></td><td>03</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_045.png" /></td><td>04</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_056.png" /></td><td>05</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_067.png" /></td><td>06</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_078.png" /></td><td>07</td></tr><tr><td style="text-align: center;"><img src="legend/MetrobusLineas_14_9.png" /></td><td></td></tr></table>': layer_MetrobusLineas_14,'Trolebus Estaciones<br /><table><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_010.png" /></td><td>01</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_021.png" /></td><td>02</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_032.png" /></td><td>03</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_043.png" /></td><td>04</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_054.png" /></td><td>05</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_065.png" /></td><td>06</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_076.png" /></td><td>07</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_087.png" /></td><td>08</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_098.png" /></td><td>09</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_109.png" /></td><td>10</td></tr><tr><td style="text-align: center;"><img src="legend/TrolebusEstaciones_13_10.png" /></td><td></td></tr></table>': layer_TrolebusEstaciones_13,'Trolebus_Lineas<br /><table><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_010.png" /></td><td>01</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_021.png" /></td><td>02</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_032.png" /></td><td>03</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_043.png" /></td><td>04</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_054.png" /></td><td>05</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_065.png" /></td><td>06</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_076.png" /></td><td>07</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_087.png" /></td><td>08</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_098.png" /></td><td>09</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_109.png" /></td><td>10</td></tr><tr><td style="text-align: center;"><img src="legend/Trolebus_Lineas_12_10.png" /></td><td></td></tr></table>': layer_Trolebus_Lineas_12,'<img src="legend/TrenLigeroParadas_11.png" /> Tren Ligero Paradas': layer_TrenLigeroParadas_11,'<img src="legend/TrenLigeroLineas_10.png" />  Tren Ligero Lineas': layer_TrenLigeroLineas_10,'<img src="legend/EstacionesCablebus_9.png" /> Estaciones Cablebus': layer_EstacionesCablebus_9,'<img src="legend/CableBus_8.png" /> CableBus': layer_CableBus_8,'<img src="legend/UnidadesHospitalarias_7.png" /> Unidades Hospitalarias ': layer_UnidadesHospitalarias_7,'<img src="legend/Hospitales_ISSSTE_6.png" /> Hospitales_ISSSTE': layer_Hospitales_ISSSTE_6,'<img src="legend/CConcesionado_Rutas_5.png" /> CConcesionado_Rutas': layer_CConcesionado_Rutas_5,'<img src="legend/CConcesionado_Paradas_4.png" /> CConcesionado_Paradas': layer_CConcesionado_Paradas_4,'<img src="legend/hex_ingresos_3.png" /> hex_ingresos': layer_hex_ingresos_3,'densidadpoblacion2010<br /><table><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_ALVAROOBREGON0.png" /></td><td>ALVARO OBREGON</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_AZCAPOTZALCO1.png" /></td><td>AZCAPOTZALCO</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_BENITOJUAREZ2.png" /></td><td>BENITO JUAREZ</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_COYOACAN3.png" /></td><td>COYOACAN</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_CUAJIMALPADEMORELOS4.png" /></td><td>CUAJIMALPA DE MORELOS</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_CUAUHTEMOC5.png" /></td><td>CUAUHTEMOC</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_GUSTAVOAMADERO6.png" /></td><td>GUSTAVO A. MADERO</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_IZTACALCO7.png" /></td><td>IZTACALCO</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_IZTAPALAPA8.png" /></td><td>IZTAPALAPA</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_LAMAGDALENACONTRERAS9.png" /></td><td>LA MAGDALENA CONTRERAS</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_MIGUELHIDALGO10.png" /></td><td>MIGUEL HIDALGO</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_MILPAALTA11.png" /></td><td>MILPA ALTA</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_TLAHUAC12.png" /></td><td>TLAHUAC</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_TLALPAN13.png" /></td><td>TLALPAN</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_VENUSTIANOCARRANZA14.png" /></td><td>VENUSTIANO CARRANZA</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_XOCHIMILCO15.png" /></td><td>XOCHIMILCO</td></tr><tr><td style="text-align: center;"><img src="legend/densidadpoblacion2010_2_16.png" /></td><td></td></tr></table>': layer_densidadpoblacion2010_2,'<img src="legend/poligonos_alcaldias_cdmx_1.png" /> poligonos_alcaldias_cdmx': layer_poligonos_alcaldias_cdmx_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_poligonos_alcaldias_cdmx_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NOMGEO'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NOMGEO']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_poligonos_alcaldias_cdmx_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        map.addControl(new L.Control.Search({
+            layer: layer_MetroEstaciones_17,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'NOMBRE'
+        }));
+        
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_poligonos_alcaldias_cdmx_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_poligonos_alcaldias_cdmx_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_poligonos_alcaldias_cdmx_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_poligonos_alcaldias_cdmx_1]);
+        });
+        </script>
+    </body>
+</html>
